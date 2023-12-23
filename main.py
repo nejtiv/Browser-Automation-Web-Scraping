@@ -15,6 +15,7 @@ def get_driver():
   driver.get("http://automated.pythonanywhere.com/")
   return driver
 
+#funkcja inicjująca proces
 def main():
   driver = get_driver()
   element = driver.find_element(by="xpath", value="/html/body/div[1]")
