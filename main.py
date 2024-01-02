@@ -1,4 +1,5 @@
 from selenium import webdriver
+import time
 
 def get_driver():
   #opcje przeglądarki inicjacja
@@ -12,13 +13,20 @@ def get_driver():
   options.add_argument("disable-blink-features=AutomationControlled")
   #dodanie opcji headless
   driver = webdriver.Chrome(options=options)
-  driver.get("http://automated.pythonanywhere.com/")
+  driver.get("https://automated.pythonanywhere.com/")
   return driver
+
+#funkcja czyszcząca tekst
+def clean_text(text):
+  output = float(text.split(": ")[1])
+  return output
+  
 
 #funkcja inicjująca proces
 def main():
   driver = get_driver()
-  element = driver.find_element(by="xpath", value="/html/body/div[1]")
-  return element
+  time.sleep(2)
+  element = driver.find_element(by="xpath", value="/html/body/div[1]/div/h1[2]")
+  return clean_text(element.text)
 
 print(main())
